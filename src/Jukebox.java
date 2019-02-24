@@ -3,7 +3,6 @@
  *    Level 1
  */
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -11,7 +10,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -25,25 +27,38 @@ public class Jukebox implements Runnable {
 		SwingUtilities.invokeLater(new Jukebox());
 	}
 
-           public void run() {
+	public void run() {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
+		Song stuff = new Song("271013__lotterywinner__piano-classical-duo.mp3");
 
 		// 5. Play the Song
+		stuff.play();
 
 		/*
-		 * 6. Create a user interface for your Jukebox so that the user can to
-		 * choose which song to play. You can use can use a different button for
-		 * each song, or a picture of the album cover. When the button or album
-		 * cover is clicked, stop the currently playing song, and play the one
-		 * that was selected.
+		 * 6. Create a user interface for your Jukebox so that the user can to choose
+		 * which song to play. You can use can use a different button for each song, or
+		 * a picture of the album cover. When the button or album cover is clicked, stop
+		 * the currently playing song, and play the one that was selected.
+		 * 
 		 */
-          }
+		JFrame jeff = new JFrame();
+		jeff.setVisible(true);
+		JPanel jp = new JPanel();
+		jeff.add(jp);
+		JButton piano = new JButton();
+		piano.add(loadImage("piano.jpg"));
+		jp.add(piano);
+		jeff.add(jp);
+		jeff.pack();
+	}
+
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {
-		URL imageURL = getClass().getResource(fileName);
-		Icon icon = new ImageIcon(imageURL);
+		URL imageURL = getClass().getResource("piano.jpg");
+		Icon icon = new ImageIcon(
+				"https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
 		return new JLabel(icon);
 	}
 
@@ -57,8 +72,7 @@ class Song {
 	private InputStream songStream;
 
 	/**
-	 * Songs can be constructed from files on your computer or Internet
-	 * addresses.
+	 * Songs can be constructed from files on your computer or Internet addresses.
 	 * 
 	 * Examples: <code> 
 	 * 		new Song("everywhere.mp3"); 	//from default package 
@@ -133,4 +147,3 @@ class Song {
 		}
 	}
 }
-

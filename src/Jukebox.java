@@ -1,8 +1,11 @@
+
 /*
  *    Copyright (c) The League of Amazing Programmers 2013-2018
  *    Level 1
  */
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,7 +24,15 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
+public class Jukebox implements Runnable, MouseListener {
+	JFrame jeff = new JFrame();
+	JPanel jp = new JPanel();
+	JLabel label = new JLabel();
+	JLabel pie = new JLabel();
+	JLabel food =new JLabel();
+	Song stuff = new Song("271013__lotterywinner__piano-classical-duo.mp3");
+	Song wow = new Song("guitar.mp3");
+	Song yummy = new Song("drumm.mp3");
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
@@ -31,7 +42,6 @@ public class Jukebox implements Runnable {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-		Song stuff = new Song("271013__lotterywinner__piano-classical-duo.mp3");
 
 		// 5. Play the Song
 		stuff.play();
@@ -43,23 +53,73 @@ public class Jukebox implements Runnable {
 		 * the currently playing song, and play the one that was selected.
 		 * 
 		 */
-		JFrame jeff = new JFrame();
+
+		jeff.addMouseListener(this);
 		jeff.setVisible(true);
-		JPanel jp = new JPanel();
 		jeff.add(jp);
-		JButton piano = new JButton();
-		piano.add(loadImage("piano.jpg"));
-		jp.add(piano);
+		label = loadImage("piano.jpg");
+		pie = loadImage("guitarr.jpg");
+		food= loadImage("drum.jpg");
+		jp.add(label);
+		jp.add(pie);
+		jp.add(food);
 		jeff.add(jp);
 		jeff.pack();
 	}
 
 	/* Use this method to add album covers to your Panel. */
 	private JLabel loadImage(String fileName) {
-		URL imageURL = getClass().getResource("piano.jpg");
-		Icon icon = new ImageIcon(
-				"https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+		URL imageURL = getClass().getResource(fileName);
+		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int pressed = e.getX();
+		int clicked = e.getY();
+	
+		if (pressed <=750&& clicked<=750) {
+			yummy.stop();
+			wow.stop();
+			stuff.play();
+		}
+		if (pressed <= 1500 && pressed >=750&&clicked <=1000) {
+			yummy.stop();
+			stuff.stop();
+			wow.play();
+		}
+		if (pressed >= 1700&& pressed >=1000&& clicked<=1000) {
+			stuff.stop();
+			wow.stop();
+			yummy.play();
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

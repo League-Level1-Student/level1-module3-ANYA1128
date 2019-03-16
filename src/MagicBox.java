@@ -39,11 +39,11 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	Song trumpet = new Song("trumpet.wav");
 	Song hey = new Song("hey.wav");
 	Song ding = new Song("ding.wav");
-	
-	
+	Song piano;
+
 	public static void main(String[] args) throws Exception {
 		SwingUtilities.invokeLater(new MagicBox());
-		
+
 	}
 
 	@Override
@@ -51,6 +51,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 		try {
 			loadBackgroundImage();
 			createUI();
+			piano = new Song("piano.wav");
 		} catch (Exception w) {
 			System.err.println(w.getMessage());
 		}
@@ -86,6 +87,25 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 		int color = backgroundImage.getRGB(e.getX(), e.getY());
 		System.out.println(color);
+		if (color == -3166864) {
+			mp.loadSound("violin.wav").play();
+		}
+		if (color == -3561874) {
+			mp.loadSound("euph.wav").play();
+		}
+		if (color == -2047618) {
+			mp.loadSound("trumpet.wav").play();
+		}
+		if (color == -5086691) {
+			mp.loadSound("hey.wav").play();
+		}
+		if (color == -6125215) {
+			mp.loadSound("ding.wav").play();
+		}
+		if (color == -69429) {
+			mp.loadSound("piano.wav").play();
+			System.out.println("wowoow");
+		}
 	}
 
 	@Override

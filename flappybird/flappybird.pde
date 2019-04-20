@@ -6,7 +6,7 @@ int upperY = 0;
 int pipeGap = 300;
 int pipeWidth = 150;
 int birdYVelocity = 0;
-int gravity = 1;
+double gravity = 1.1;
 int pipeX=700;
 int upperPipeHeight = (int) random(100, 400);
 int lowerPipeHeight = 1000 - lowerY;
@@ -42,7 +42,7 @@ void draw() {
   image (pipeBottom, pipeX, lowerY);
   image (pipeTop, pipeX, upperY);
   image (bird, birdX, birdY);
-  pipeX--;
+  pipeX-=2;
   text("Score: "+ x, 50, 50);
   birdY+=birdYVelocity;
   birdYVelocity+=gravity;

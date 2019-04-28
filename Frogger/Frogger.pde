@@ -1,15 +1,24 @@
 int hopDistance;
-int xPosition=10;
-int yPosition=560;
+int xPosition=300;
+int yPosition=530;
+PImage back;
+
+PImage frog;
 Car car = new Car(300,100,50,1);
 Car poo = new Car(500,200,50,4);
-Car wow = new Car(10,300,50,3);
-Car yay = new Car(400,400,50,5);
-
+Car wow = new Car(10,260,50,3);
+Car yay = new Car(400,450,50,5);
+void setup() {
+size(844,600);
+            back = loadImage("froggerBackground.png");
+            frog = loadImage("frog.png");
+}
 void draw() {
-background(30,30,30);
-fill(#3B9B58);
-ellipse(xPosition,yPosition,80,80);
+back.resize(844,600);
+  background(back);
+  frog.resize(75,75);
+  image(frog,xPosition,yPosition);
+           
 keepFrogger();
 car.display();
 poo.display();
@@ -19,28 +28,42 @@ car.keepCarLeft();
 poo.keepCarRight();
 wow.keepCarLeft();
 yay.keepCarRight();
+if(car.intersects(car)==true){
+  xPosition=300;
+  yPosition=530;
 }
-void setup() {
-size(800, 600);
+if(car.intersects(poo)==true){
+  xPosition=300;
+  yPosition=530;
 }
+if(car.intersects(wow)==true){
+  xPosition=300;
+  yPosition=530;
+}
+if(car.intersects(yay)==true){
+  xPosition=300;
+  yPosition=530;
+}
+}
+
 void keyPressed()
 {
       if(key == CODED){
             if(keyCode == UP)
             {
-                  yPosition-=4;
+                  yPosition-=5;
             }
             else if(keyCode == DOWN)
             {
-                  yPosition+=4; 
+                  yPosition+=5; 
             }
             else if(keyCode == RIGHT)
             {
-                  xPosition+=4;
+                  xPosition+=5;
             }
             else if(keyCode == LEFT)
             {
-                  xPosition-=4;
+                  xPosition-=5;
             }
       }
 }
@@ -87,20 +110,23 @@ void keepCarRight(){
    carX=0;
  }
 }
+
+int getX(){
+return carX;
+}
+int getY(){
+  return carY;
+}
+int getSize(){
+  return carSize;
+}
 boolean intersects(Car car) {
-      if ((yPosition > car.getY() && yPosition < car.getY()+50) && (xPosition > car.getX() && xPosition < car.getX()+car.getSize()))
+      if ((yPosition > car.getY()-50&& yPosition < car.getY()+50) && (xPosition > car.getX()-50 && xPosition < car.getX()+car.getSize()))
       {
              return true;
       }
-      else 
-      {
-             return false;
+      else {
+        return false;
       }
-}
-void getX(){
-}
-void getY(){
-}
-void getSize(){
 }
 }

@@ -51,19 +51,19 @@ void keyPressed()
       if(key == CODED){
             if(keyCode == UP)
             {
-                  yPosition-=5;
+                  yPosition-=10;
             }
             else if(keyCode == DOWN)
             {
-                  yPosition+=5; 
+                  yPosition+=10; 
             }
             else if(keyCode == RIGHT)
             {
-                  xPosition+=5;
+                  xPosition+=10;
             }
             else if(keyCode == LEFT)
             {
-                  xPosition-=5;
+                  xPosition-=10;
             }
       }
 }
